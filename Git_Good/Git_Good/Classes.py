@@ -1,5 +1,7 @@
 #Classes file
+import numpy as np
 
+#Define clas User
 class User:
     def __init__(self, surname, name):
         self.surname = surname
@@ -7,17 +9,21 @@ class User:
         self.fullname = self.surname + " " + self.name
         self.user_id = self.surname + self.name
 
-    def return_full_name(self):
-        print("Your username is {}.".format(self.fullname))
-        print("Your user ID is {}.".format(self.user_id))
 
+# Define class Order that creates an order
+class Order:
+    def __init__(self, user_id, product, quantity):
+        self.user_id = user_id
+        self.product = product
+        self.quantity = quantity
 
-# Commented out for later use
-# surname = input('What is your surname?: ').upper()
-# name = input('What is your last name?: ').upper()
-# user = User(surname, name)
-
-user = User('PIET','HEIN')
-user.return_full_name()
+    def trade(self):
+        order_action = input("Are you sure you want to place this order 'yes'/'no' ? ")
+        if order_action == 'yes':
+            trade = [self.user_id, self.product, self.quantity]
+            return trade
+        elif order_action == 'no':
+            trade = [np.isnan, np.isnan, np.isnan]
+            return trade
 
 
