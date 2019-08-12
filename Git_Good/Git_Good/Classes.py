@@ -41,5 +41,3 @@ class Portfolio:
         df1.columns = ['Product', 'Quantity']
         df1.set_index('Product', inplace=True)
         return df1
-
-position = {'A': 0, 'B': 0, 'C': 0}
