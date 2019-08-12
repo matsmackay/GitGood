@@ -1,5 +1,6 @@
 #Classes file
 import numpy as np
+import pandas as pd
 
 #Define clas User
 class User:
@@ -28,15 +29,15 @@ class Order:
 
 
 class Portfolio:
-    def __init__(self, user, position=position):
+    def __init__(self, user, position):
         self.user = user
         self.position = position
 
     def trade(self, product, quantity):
         self.position[product] += quantity
 
-    def get_positions(self, position=position):
-        position2 = [(key, value) for (key, value) in position.items() if value != 0]
+    def get_positions(self):
+        position2 = [(key, value) for (key, value) in self.position.items() if value != 0]
         df1 = pd.DataFrame(position2)
         df1.columns = ['Product', 'Quantity']
         df1.set_index('Product', inplace=True)

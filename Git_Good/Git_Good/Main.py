@@ -1,6 +1,6 @@
 # import numpy as np
 import pandas as pd
-from Classes import User, Order, Portfolio
+from Classes import User, Order
 
 market_data = pd.read_csv('stockdatawide.csv')
 
