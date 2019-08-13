@@ -5,10 +5,10 @@ import pandas as pd
 #Define class User
 class User:
     def __init__(self, surname, name):
-        self._surname = surname
-        self._name = name
-        self._fullname = self.surname + " " + self.name
-        self._user_id = self.surname + self.name
+        self.surname = surname
+        self.name = name
+        self.fullname = self.surname + " " + self.name
+        self.user_id = self.surname + self.name
 
 
 # Define class Order that creates an order
@@ -20,6 +20,7 @@ class Order:
         self.order_type = order_type
         self.product_price = product_price
         self.order_date = order_date
+        self.trade_details = []
 
     def trade(self):
         order_action = input("Are you sure you want to place this order 'yes'/'no' ? ")
@@ -31,10 +32,9 @@ class Order:
                 self.quantity = -1*self.quantity
                 trade = [self.user_id, self.product, self.quantity, self.order_type, self.product_price,
                          self.order_date]
-            return trade
         elif order_action == 'no':
             trade = [np.isnan, np.isnan, np.isnan, np.isnan, np.isnan]
-            return trade
+        self.trade_details = trade
 
 
 class Portfolio:
