@@ -2,13 +2,13 @@
 import numpy as np
 import pandas as pd
 
-#Define clas User
+#Define class User
 class User:
     def __init__(self, surname, name):
-        self.surname = surname
-        self.name = name
-        self.fullname = self.surname + " " + self.name
-        self.user_id = self.surname + self.name
+        self._surname = surname
+        self._name = name
+        self._fullname = self.surname + " " + self.name
+        self._user_id = self.surname + self.name
 
 
 # Define class Order that creates an order
