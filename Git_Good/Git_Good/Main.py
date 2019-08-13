@@ -15,16 +15,20 @@ position = pd.DataFrame(0, index=np.arange(0), columns=market_data.columns)
 # Request user details
 surname = input('What is your surname?: ').upper()
 name = input('What is your first name?: ').upper()
+user = User(surname, name)
+portfolio_user = Portfolio(user.user_id, position)
 
 while True:
     # Create the user object
     date = market_data.index[counter]
-    user = User(surname, name)
-    print("Hello {}.".format(user.fullname))
-#    print("Your user ID is {}.".format(user.user_id))
-    portfolio_user = Portfolio(user.user_id, position)
 
     while True:
+        print("Welcome {}. Let's make money!!! ".format(user.fullname))
+        if len(portfolio_user.position.index) == 0:
+            print("Your portfolio is currently empty")
+        else:
+            print("Your portfolio is currently as follows:")
+            print(portfolio_user.get_positions())
         trade_indicator = input("Today it's {}, a perfect day for trading. Would you like to make a trade? (yes/no)"
                                 .format(date))
         if trade_indicator in ['yes', 'no']:
