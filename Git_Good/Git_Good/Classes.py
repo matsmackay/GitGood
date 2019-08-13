@@ -36,17 +36,48 @@ class Order:
             trade = [np.isnan, np.isnan, np.isnan, np.isnan, np.isnan]
             return trade
 
+
 class Portfolio:
     def __init__(self, user, position):
         self.user = user
         self.position = position
 
-    def trade(self, product, quantity):
-        self.position[product] += quantity
+    def trade(self, trade):
+        self.product = trade[1]
+        self.quantity = trade[2]
+        self.ordertype = trade[3]
+        self.date = trade[5]
+
+        if self.date in self.position.index:
+            self.position.loc[self.date, self.product] += self.quantity
+        else:
+            self.position.loc[self.date] = pd.Series([0.0] * len(self.position.columns))
+            self.position.loc[self.date] = 0
+            self.position.loc[self.date] = self.position.iloc[self.position.index.get_loc(self.date) - 1, :]
+            self.position.loc[self.date, self.product] += self.quantity
+
+        return "Trade processed: {} shares of {}.".format(self.quantity, self.product)
 
     def get_positions(self):
-        position2 = [(key, value) for (key, value) in self.position.items() if value != 0]
-        df1 = pd.DataFrame(position2)
-        df1.columns = ['Product', 'Quantity']
-        df1.set_index('Product', inplace=True)
+        m1 = (self.position.loc[self.date, :] != 0)
+        m2 = self.position.loc[self.date, m1]
+        df1 = pd.DataFrame(m2)
+        df1.columns = ['Quantity']
         return df1
+
+    def calc_portfolio_value(self, market_data):
+        portfolio_balance = pd.DataFrame(columns=['date', 'balance'])
+
+        for date in self.position.index:
+            balance = 0
+            for stock in self.position.columns:
+                if self.position.loc[date, stock] == np.isnan:
+                    balance_temp = 0
+                else:
+                    balance_temp = market_data.loc[date, stock] * self.position.loc[date, stock]
+                    balance += balance_temp
+            portfolio_balance = portfolio_balance.append(pd.DataFrame([[date, balance]], columns=portfolio_balance.columns))
+
+            # portfolio_balance.set_index('date', inplace = True)
+
+        return portfolio_balance

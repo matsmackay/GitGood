@@ -1,6 +1,6 @@
 # import numpy as np
 import pandas as pd
-from Classes import User, Order
+from Classes import User, Order, Portfolio
 
 market_data = pd.read_csv('stockdatawide.csv')
 position = pd.DataFrame(0, index=np.arange(0), columns=market_data.columns)
