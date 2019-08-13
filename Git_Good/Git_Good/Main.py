@@ -3,6 +3,7 @@ import pandas as pd
 from Classes import User, Order
 
 market_data = pd.read_csv('stockdatawide.csv')
+position = pd.DataFrame(0, index=np.arange(0), columns=market_data.columns)
 
 # Request user details
 surname = input('What is your surname?: ').upper()
@@ -35,3 +36,4 @@ while True:
     print("You ordered {} ".format(order.quantity) + "stocks of {}".format(order.product))
 
     break
+
