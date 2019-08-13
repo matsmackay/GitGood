@@ -13,20 +13,28 @@ class User:
 
 # Define class Order that creates an order
 class Order:
-    def __init__(self, user_id, product, quantity):
+    def __init__(self, user_id, product, quantity, order_type, product_price, order_date):
         self.user_id = user_id
         self.product = product
         self.quantity = quantity
+        self.order_type = order_type
+        self.product_price = product_price
+        self.order_date = order_date
 
     def trade(self):
         order_action = input("Are you sure you want to place this order 'yes'/'no' ? ")
         if order_action == 'yes':
-            trade = [self.user_id, self.product, self.quantity]
+            if self.order_type == 'buy':
+                trade = [self.user_id, self.product, self.quantity, self.order_type, self.product_price ,
+                         self.order_date]
+            elif self.order_type == 'sell':
+                self.quantity = -1*self.quantity
+                trade = [self.user_id, self.product, self.quantity, self.order_type, self.product_price,
+                         self.order_date]
             return trade
         elif order_action == 'no':
-            trade = [np.isnan, np.isnan, np.isnan]
+            trade = [np.isnan, np.isnan, np.isnan, np.isnan, np.isnan]
             return trade
-
 
 class Portfolio:
     def __init__(self, user, position):
