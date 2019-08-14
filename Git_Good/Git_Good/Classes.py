@@ -77,7 +77,6 @@ class Portfolio:
                     balance_temp = market_data.loc[date, stock] * self.position.loc[date, stock]
                     balance += balance_temp
             portfolio_balance = portfolio_balance.append(pd.DataFrame([[date, balance]], columns=portfolio_balance.columns))
-
             # portfolio_balance.set_index('date', inplace = True)
 
         return portfolio_balance
