@@ -4,9 +4,9 @@ import pandas as pd
 
 #Define class User
 class User:
-    def __init__(self, surname: str, name: str) -> None:
+    def __init__(self, surname: str, firstname: str) -> None:
         self._surname = surname
-        self._name = name
+        self._firstname = firstname
 
     @property
     def surname(self) -> str:
@@ -14,15 +14,15 @@ class User:
 
     @property
     def name(self) -> str:
-        return self._name
+        return self._firstname
 
     @property
     def fullname(self) -> str:
-        return self._surname + " " + self._name
+        return self._surname + " " + self._firstname
 
     @property
     def user_id(self) -> str:
-        return self._surname + self._name
+        return self._surname + self._firstname
 
 
 # Define class Order that creates an order

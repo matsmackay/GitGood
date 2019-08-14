@@ -14,8 +14,8 @@ position = pd.DataFrame(0, index=np.arange(0), columns=market_data.columns)
 
 # Request user details
 surname = input('What is your surname?: ').upper()
-name = input('What is your first name?: ').upper()
-user = User(surname, name)
+firstname = input('What is your first name?: ').upper()
+user = User(surname, firstname)
 portfolio_user = Portfolio(user.user_id, position)
 
 while True:
