@@ -13,8 +13,8 @@ position = pd.DataFrame(0, index=np.arange(0), columns=market_data.columns)
 
 # Request user details
 surname = input('What is your surname?: ').upper()
-name = input('What is your first name?: ').upper()
-user = User(surname, name)
+firstname = input('What is your first name?: ').upper()
+user = User(surname, firstname)
 user_exp = UserExperience(User.user_id)
 portfolio_user = Portfolio(user.user_id, position)
 
@@ -70,11 +70,13 @@ while True:
             if answer == 'no':
                 print("We hope you have had a great trading experience today. Your closing balance is as follows:")
                 print(portfolio_user.calc_portfolio_value(market_data))
+                portfolio_user.plot_portfolio_value(market_data)
                 print('We hope to see you again tomorrow. Have a good day!')
                 break
 
     elif trade_indicator == 'no':
         print("We hope you have had a great trading experience, have a good day!")
+        print(portfolio_user.calc_portfolio_value(market_data))
         break
 
     counter += 1
