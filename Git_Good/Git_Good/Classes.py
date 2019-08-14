@@ -98,3 +98,46 @@ class Portfolio:
             portfolio_balance.set_index('date', inplace = True)
 
         return portfolio_balance
+
+
+class UserExperience:
+    def __init__(self, user_id):
+        self._user_id = user_id
+        self.assistant = ""
+        self.order_type = ""
+
+    @property
+    def user_id(self) -> str:
+        return self._user_id
+
+    def call_assistant(self, fullname, counter):
+        if counter ==0:
+            print("Welcome " + fullname + ". I am James, your personal trading assistant. Let's make money!!! ")
+        else:
+            print("Welcome back! " + fullname + ". Let's make money!!! ")
+
+    def trade_indicator_func(self, date):
+        while True:
+            answer = input("Today it's {}, a perfect day for trading. Would you like to make a trade? (yes/no)"
+                                    .format(date))
+            if answer in ['yes', 'no']:
+                return answer
+            else:
+                print('Please enter "yes" or "no" ')
+
+    def order_type_func(self):
+        while True:
+            answer = input('Do you want to buy or sell stocks? ')
+            if answer in ['buy', 'sell']:
+                print("Good choice, let's go trading!!!")
+                return answer
+            else:
+                print('order type is not valid, please enter "buy" or "sell" ')
+
+    def trading_again(self):
+        while True:
+            answer = input('Do you want to make another trade today? (yes/no) ')
+            if answer in ['yes', 'no']:
+                return answer
+            else:
+                print('Please enter "yes" or "no" ')
