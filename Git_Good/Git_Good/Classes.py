@@ -1,6 +1,8 @@
 #Classes file
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 #Define class User
 class User:
@@ -42,6 +44,7 @@ class Portfolio:
         self.user = user
         self.position = position
 
+
     def trade(self, trade):
         self.product = trade[1]
         self.quantity = trade[2]
@@ -73,8 +76,16 @@ class Portfolio:
             for stock in self.position.columns:
                 balance_temp = market_data.loc[date, stock] * self.position.loc[date, stock]
                 balance += balance_temp
-
             portfolio_balance = portfolio_balance.append(pd.DataFrame([[date, balance]], columns=portfolio_balance.columns))
-            portfolio_balance.set_index('date', inplace = True)
+
+        portfolio_balance.set_index('date', inplace=True)
 
         return portfolio_balance
+
+    def plot_portfolio_value(self, market_data):
+        portfolio_balance = self.calc_portfolio_value(market_data)
+        sns.set(style="darkgrid")
+        # Plot the responses for different events and regions
+        plot1 = sns.lineplot(x=portfolio_balance.index, y=portfolio_balance['balance'], linewidth=2.5)
+        plot1.set_title('Portfolio overview')
+        plt.show()

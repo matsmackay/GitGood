@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import seaborn as sns
 from Classes import User, Order, Portfolio
 
 #import market data, set index to date and transform to datetime
@@ -77,16 +78,18 @@ while True:
             while True:
                 another_trade = input('Do you want to make another trade today? (yes/no) ')
                 if another_trade in ['yes', 'no']:
-                    print(portfolio_user.calc_portfolio_value(market_data))
                     break
                 else:
                     print('Please enter "yes" or "no" ')
 
             if another_trade == 'no':
+                print(portfolio_user.calc_portfolio_value(market_data))
+                portfolio_user.plot_portfolio_value(market_data)
                 break
 
     elif trade_indicator == 'no':
         print("We hope you have had a great trading experience, have a good day!")
+        print(portfolio_user.calc_portfolio_value(market_data))
         break
 
     counter += 1
