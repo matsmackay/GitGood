@@ -4,11 +4,25 @@ import pandas as pd
 
 #Define class User
 class User:
-    def __init__(self, surname, name):
-        self.surname = surname
-        self.name = name
-        self.fullname = self.surname + " " + self.name
-        self.user_id = self.surname + self.name
+    def __init__(self, surname: str, name: str) -> None:
+        self._surname = surname
+        self._name = name
+
+    @property
+    def surname(self) -> str:
+        return self._surname
+
+    @property
+    def name(self) -> str:
+        return self._name
+
+    @property
+    def fullname(self) -> str:
+        return self._surname + " " + self._name
+
+    @property
+    def user_id(self) -> str:
+        return self._surname + self._name
 
 
 # Define class Order that creates an order
