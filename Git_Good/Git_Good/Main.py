@@ -77,6 +77,7 @@ while True:
             while True:
                 another_trade = input('Do you want to make another trade today? (yes/no) ')
                 if another_trade in ['yes', 'no']:
+                    print(portfolio_user.calc_portfolio_value(market_data))
                     break
                 else:
                     print('Please enter "yes" or "no" ')
