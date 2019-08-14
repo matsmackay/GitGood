@@ -109,4 +109,7 @@ class Portfolio:
         # Plot the responses for different events and regions
         plot1 = sns.lineplot(x=portfolio_balance.index, y=portfolio_balance['balance'], linewidth=2.5)
         plot1.set_title('Portfolio overview')
+        plot1.xaxis.set_major_locator(mdates.DayLocator(interval=1))
+        plot1.xaxis.set_major_formatter(mdates.DateFormatter('%d.%m.%Y'))
+        plot1.xaxis.set_tick_params(rotation=45)
         plt.show()
