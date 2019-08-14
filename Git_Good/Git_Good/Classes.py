@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import seaborn as sns
 
 #Define class User
@@ -105,11 +106,14 @@ class Portfolio:
 
     def plot_portfolio_value(self, market_data):
         portfolio_balance = self.calc_portfolio_value(market_data)
-        sns.set(style="darkgrid")
-        # Plot the responses for different events and regions
-        plot1 = sns.lineplot(x=portfolio_balance.index, y=portfolio_balance['balance'], linewidth=2.5)
-        plot1.set_title('Portfolio overview')
-        plot1.xaxis.set_major_locator(mdates.DayLocator(interval=1))
-        plot1.xaxis.set_major_formatter(mdates.DateFormatter('%d.%m.%Y'))
-        plot1.xaxis.set_tick_params(rotation=45)
-        plt.show()
+        if len(portfolio_balance) == 1:
+            pass
+        else:
+            sns.set(style="ticks")
+            # Plot the responses for different events and regions
+            plot1 = sns.lineplot(x=portfolio_balance.index, y=portfolio_balance['balance'], linewidth=2.5, markers=True)
+            plot1.set_title('Portfolio overview')
+            plot1.xaxis.set_major_locator(mdates.DayLocator(interval=1))
+            plot1.xaxis.set_major_formatter(mdates.DateFormatter('%d.%m'))
+            plot1.xaxis.set_tick_params(rotation=45)
+            plt.show()
