@@ -4,9 +4,16 @@ import pandas as pd
 
 #Define class User
 class User:
+
     def __init__(self, surname: str, firstname: str) -> None:
-        self._surname = surname
-        self._firstname = firstname
+        if surname == "":
+            raise ValueError("Surname not defined, please enter your surname")
+        else:
+            self._surname = surname
+        if firstname == "":
+            raise ValueError("Name not defined, please enter your name")
+        else:
+            self._firstname = firstname
 
     @property
     def surname(self) -> str:
