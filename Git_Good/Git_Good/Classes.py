@@ -6,11 +6,32 @@ import seaborn as sns
 
 #Define class User
 class User:
-    def __init__(self, surname, name):
-        self.surname = surname
-        self.name = name
-        self.fullname = self.surname + " " + self.name
-        self.user_id = self.surname + self.name
+
+    def __init__(self, surname: str, firstname: str) -> None:
+        if surname == "":
+            raise ValueError("Surname not defined, please enter your surname")
+        else:
+            self._surname = surname
+        if firstname == "":
+            raise ValueError("Name not defined, please enter your name")
+        else:
+            self._firstname = firstname
+
+    @property
+    def surname(self) -> str:
+        return self._surname
+
+    @property
+    def name(self) -> str:
+        return self._firstname
+
+    @property
+    def fullname(self) -> str:
+        return self._surname + " " + self._firstname
+
+    @property
+    def user_id(self) -> str:
+        return self._surname + self._firstname
 
 
 # Define class Order that creates an order
