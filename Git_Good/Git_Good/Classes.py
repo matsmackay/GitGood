@@ -85,12 +85,10 @@ class Portfolio:
         for date in self.position.index:
             balance = 0
             for stock in self.position.columns:
-                if self.position.loc[date, stock] == np.isnan:
-                    balance_temp = 0
-                else:
-                    balance_temp = market_data.loc[date, stock] * self.position.loc[date, stock]
-                    balance += balance_temp
+                balance_temp = market_data.loc[date, stock] * self.position.loc[date, stock]
+                balance += balance_temp
+
             portfolio_balance = portfolio_balance.append(pd.DataFrame([[date, balance]], columns=portfolio_balance.columns))
-            # portfolio_balance.set_index('date', inplace = True)
+            portfolio_balance.set_index('date', inplace = True)
 
         return portfolio_balance
